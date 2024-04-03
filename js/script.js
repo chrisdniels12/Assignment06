@@ -8,6 +8,7 @@ let count = 0;
 function updateCount() {
     let outPutTag = document.querySelector("#empCount")
     outPutTag.textContent = `(${count})`
+}
 
 // ADD EMPLOYEE
 form.addEventListener('submit', (e) => {
