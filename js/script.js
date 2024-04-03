@@ -1,13 +1,13 @@
 // GET ADD EMPLOYEE FORM AND EMPLOYEE TABLE FROM THE DOM
-let form = document.querySelector("form")
-let table = document.querySelector("table")
+let form = document.querySelector("form")  // select the EE form
+let table = document.querySelector("table")  // select the table
 // SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
 let count = 0;
 
+// function to update the count inside the display tag
 function updateCount() {
     let outPutTag = document.querySelector("#empCount")
     outPutTag.textContent = `(${count})`
-}
 
 // ADD EMPLOYEE
 form.addEventListener('submit', (e) => {
@@ -28,7 +28,7 @@ form.addEventListener('submit', (e) => {
     let cellExtension = newRow.insertCell(2)
     let cellEmail = newRow.insertCell(3)
     let cellDepartment = newRow.insertCell(4)
-    let cellDelete = newRow.insertCell(5)
+    let cellDeleteBtn = newRow.insertCell(5)
 
     // APPEND THE TEXT VALUES AS TEXT NODES WITHIN THE CELLS
     cellId.appendChild(document.createTextNode(id))
@@ -39,16 +39,20 @@ form.addEventListener('submit', (e) => {
 
     // CREATE THE DELETE BUTTON
     let deleteBtn = document.createElement("button")
-    deleteBtn.textContent = "Delete"
-    deleteBtn.classList.add("btn", "btn-danger")
+    deleteBtn.textContent = "X"
+    deleteBtn.classList.add("btn", "btn-danger")   // add bootstrap styles
     deleteBtn.addEventListener("click", ()=>{
+        let confirmDelete = confirm("Are you sure you want to delete this entry?");
+        if (confirmDelete) {
+            // remove the row, decrement the count, and update the output
         table.deleteRow(newRow.rowIndex)
         count--
         updateCount()
+        }
     })
-    cellDelete.appendChild(deleteBtn)
+    cellDeleteBtn.appendChild(deleteBtn)  // append the delete btn to the cell
 
-    // RESET THE FORM
+    // RESET THE FORM, clear its contents
     form.reset();
 
     // SET FOCUS BACK TO THE ID TEXT BOX
